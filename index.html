@@ -1,76 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Esta ONLINE...</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Agora</title>
 
 <!-- Meta Pixel -->
 <script>
-!function(f,b,e,v,n,t,s){
-if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)
-}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+(function(){
+  if (window.fbq) return;
+  var fbq = function(){ fbq.callMethod ?
+    fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments) };
+  fbq.queue = [];
+  fbq.version = '2.0';
+  fbq.loaded = true;
+  window.fbq = fbq;
 
-fbq('init', '1748812605764523');
-fbq('track', 'PageView');
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = "https://connect.facebook.net/en_US/fbevents.js";
+  document.head.appendChild(script);
+
+  fbq('init', '1748812605764523');
+  fbq('track', 'PageView');
+})();
 </script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:Arial, sans-serif;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#87CEFA;
-padding:20px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.card{
-background:rgba(0,0,0,0.45);
-border-radius:24px;
-padding:40px 30px;
-max-width:380px;
-width:100%;
-text-align:center;
-box-shadow:0 8px 32px rgba(0,0,0,0.35);
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #87CEFA;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.status{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:8px;
-margin-bottom:24px;
+
+.card {
+  background: rgba(0,0,0,0.5);
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 360px;
+  color: white;
 }
-.status-dot{
-width:12px;
-height:12px;
-border-radius:50%;
-background:#10b981;
+
+.status {
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
-.status-text{
-color:#6ee7b7;
-font-size:14px;
-font-weight:500;
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #00ff66;
+  border-radius: 50%;
 }
-.button{
-width:100%;
-background:linear-gradient(135deg,#2AABEE,#229ED9);
-border:none;
-border-radius:12px;
-padding:16px;
-color:#fff;
-cursor:pointer;
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg,#2AABEE,#229ED9);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
 }
-footer{
-margin-top:24px;
-font-size:12px;
-color:rgba(255,255,255,0.8);
+
+button:hover {
+  opacity: 0.9;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 11px;
+  opacity: 0.8;
 }
 </style>
 </head>
@@ -80,17 +95,16 @@ color:rgba(255,255,255,0.8);
 <div class="card">
 
 <div class="status">
-<div class="status-dot"></div>
-<span class="status-text">Online...</span>
+<div class="dot"></div>
+<span>Online...</span>
 </div>
 
-<button class="button" id="telegram-button">
+<button id="openTelegram">
 ABRIR NO TELEGRAM
 </button>
 
 <footer>
-© 2026 <br>
-Todos os direitos reservados
+© 2026 - Todos os direitos reservados
 </footer>
 
 </div>
@@ -98,70 +112,60 @@ Todos os direitos reservados
 <script>
 (function(){
 
-function safeBase64(obj){
-try{
-return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
-}catch(e){
-return "";
+function encodeSafe(data){
+  try{
+    return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  }catch(e){
+    return "";
+  }
 }
+
+function getUTM(){
+  var params = new URLSearchParams(window.location.search);
+  var obj = {};
+  params.forEach(function(value,key){
+    obj[key] = value;
+  });
+  return obj;
 }
 
 function getCookie(name){
-const match=document.cookie.match(new RegExp('(^| )'+name+'=([^;]+)'));
-return match ? match[2] : '';
+  var match = document.cookie.match(new RegExp('(^| )'+name+'=([^;]+)'));
+  return match ? match[2] : "";
 }
 
-function getParams(){
-const urlParams=new URLSearchParams(window.location.search);
-const params={};
-['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid']
-.forEach(p=>{
-const value=urlParams.get(p);
-if(value){params[p]=value}
-});
-return params;
-}
-
-const btn=document.getElementById('telegram-button');
+var btn = document.getElementById("openTelegram");
 
 if(btn){
-btn.addEventListener('click',function(){
+  btn.addEventListener("click", function(){
 
-const payload={
-...getParams(),
-fbp:getCookie('_fbp'),
-fbc:getCookie('_fbc'),
-user_agent:navigator.userAgent,
-referrer:document.referrer,
-timestamp:Date.now()
-};
+    var payload = {
+      utm: getUTM(),
+      fbp: getCookie("_fbp"),
+      fbc: getCookie("_fbc"),
+      ua: navigator.userAgent,
+      ref: document.referrer,
+      ts: Date.now()
+    };
 
-// Pixel seguro
-if(typeof fbq !== "undefined"){
-try{
-fbq('trackCustom','ClickTelegram',payload);
-fbq('track','Lead',payload);
-}catch(e){}
-}
+    if(typeof fbq !== "undefined"){
+      try{
+        fbq('track','Lead',payload);
+      }catch(e){}
+    }
 
-const bots=[
-"https://t.me/Carolina_Vipbot?start=",
-"https://t.me/Carolina_borgesbot?start="
-];
+    var bots = [
+      "https://t.me/Carolina_Vipbot?start=",
+      "https://t.me/Carolina_borgesbot?start="
+    ];
 
-const chosenBot=bots[Math.floor(Math.random()*bots.length)];
-const encoded=safeBase64(payload);
+    var bot = bots[Math.floor(Math.random() * bots.length)];
 
-const finalURL=chosenBot+encoded;
+    var finalLink = bot + encodeSafe(payload);
 
-// Redirecionamento seguro
-try{
-window.location.assign(finalURL);
-}catch(e){
-window.location.href=finalURL;
-}
+    window.location.href = finalLink;
 
-});
+  });
 }
 
 })();
