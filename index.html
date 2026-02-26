@@ -68,7 +68,6 @@ gap:8px;
 margin-bottom:24px;
 }
 
-/* Bolinha verde pulsando leve */
 .status-dot{
 width:12px;
 height:12px;
@@ -101,7 +100,6 @@ box-shadow:0 4px 16px rgba(34,158,217,0.35);
 animation:buttonPulse 2s infinite ease-in-out;
 }
 
-/* Botão pulsando leve e suave */
 @keyframes buttonPulse{
 0%{transform:scale(1);}
 50%{transform:scale(1.05);}
@@ -124,8 +122,8 @@ font-size:12px;
 color:rgba(255,255,255,0.8);
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="card">
@@ -175,6 +173,10 @@ params[p]=urlParams.get(p)
 return params;
 }
 
+function isMobile(){
+return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
 document.getElementById('telegram-button')
 .addEventListener('click',function(){
 
@@ -196,19 +198,25 @@ fbq('trackCustom','ClickTelegram',payload);
 fbq('track','Lead',payload);
 }catch(e){}
 
-const bots=[
-"https://t.me/Carolina_Vipbot?start=",
-"https://t.me/Carolina_borgesbot?start="
+const botNames=[
+"Carolina_Vipbot",
+"Carolina_borgesbot"
 ];
 
-const chosenBot=bots[Math.floor(Math.random()*bots.length)];
+const chosenBot=botNames[Math.floor(Math.random()*botNames.length)];
 
 const encoded=btoa(JSON.stringify(payload));
 
 const delay=Math.floor(Math.random()*(1400-700+1))+700;
 
 setTimeout(function(){
-window.location.href=chosenBot+encoded;
+
+if(isMobile()){
+window.location.href="tg://resolve?domain="+chosenBot+"&start="+encoded;
+}else{
+window.location.href="https://t.me/"+chosenBot+"?start="+encoded;
+}
+
 },delay);
 
 });
