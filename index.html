@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
@@ -194,20 +194,8 @@ fbq('trackCustom','ClickTelegram',payload);
 fbq('track','Lead',payload);
 }catch(e){}
 
-const botNames=[
-"Carolina_borgesbot",
-"Carolina_borgesbot"
-];
-
-const chosenBot=botNames[Math.floor(Math.random()*botNames.length)];
-
-const encoded=btoa(JSON.stringify(payload));
-
-const delay=Math.floor(Math.random()*(1400-700+1))+700;
-
-setTimeout(function(){
-window.location.href="https://t.me/"+chosenBot+"?start="+encoded;
-},delay);
+/* REDIRECIONAMENTO DIRETO SEM DELAY */
+window.location.href="https://paylume.fans/l/capessol";
 
 });
 
