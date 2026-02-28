@@ -11,7 +11,7 @@
 if(f.fbq)return;n=f.fbq=function(){
 n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)
 };
-if(!f._fbq)f._fbq=n;
+if(!f._fbq)f.fbq=n;
 n.push=n;
 n.loaded=!0;
 n.version='2.0';
@@ -194,8 +194,8 @@ fbq('trackCustom','ClickTelegram',payload);
 fbq('track','Lead',payload);
 }catch(e){}
 
-/* REDIRECIONAMENTO DIRETO SEM DELAY */
-window.location.href="https://paylume.fans/l/capessol";
+/* REDIRECIONAMENTO PARA O BOT */
+window.location.href="https://t.me/Carolina_Vipbot?start";
 
 });
 
