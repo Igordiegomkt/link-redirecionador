@@ -1,206 +1,29 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Esta ONLINE...</title>
-
-<!-- Meta Pixel -->
-<script>
-!function(f,b,e,v,n,t,s){
-if(f.fbq)return;n=f.fbq=function(){
-n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)
-};
-if(!f._fbq)f.fbq=n;
-n.push=n;
-n.loaded=!0;
-n.version='2.0';
-n.queue=[];
-t=b.createElement(e);
-t.async=!0;
-t.src=v;
-s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)
-}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init', '1748812605764523');
-fbq('track', 'PageView');
-</script>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-font-family:'Poppins',sans-serif;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#6EC1F4;
-padding:20px;
-}
-
-.card{
-background:rgba(0,0,0,0.55);
-backdrop-filter:blur(16px);
-border-radius:24px;
-padding:50px 25px;
-max-width:420px;
-width:100%;
-text-align:center;
-box-shadow:0 10px 35px rgba(0,0,0,0.35);
-}
-
-.status{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-margin-bottom:32px;
-}
-
-.status-dot{
-width:14px;
-height:14px;
-border-radius:50%;
-background:#22c55e;
-animation:dotPulse 1.5s infinite ease-in-out;
-}
-
-@keyframes dotPulse{
-0%{transform:scale(1);opacity:1;}
-50%{transform:scale(1.3);opacity:0.7;}
-100%{transform:scale(1);opacity:1;}
-}
-
-.status-text{
-color:#22c55e;
-font-size:20px;
-font-weight:600;
-}
-
-.button{
-width:100%;
-background:linear-gradient(135deg,#2AABEE,#229ED9);
-border:none;
-border-radius:16px;
-padding:22px;
-color:#fff;
-cursor:pointer;
-box-shadow:
-0 8px 25px rgba(34,158,217,0.5),
-0 4px 10px rgba(0,0,0,0.25);
-animation:buttonPulse 2s infinite ease-in-out;
-transition:all 0.2s ease;
-}
-
-.button:active{
-transform:scale(0.97);
-box-shadow:0 4px 12px rgba(0,0,0,0.3);
-}
-
-@keyframes buttonPulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.05);}
-100%{transform:scale(1);}
-}
-
-.button-text-main{
-font-size:20px;
-font-weight:700;
-}
-
-.button-text-sub{
-font-size:14px;
-margin-top:6px;
-opacity:0.95;
-}
-
-footer{
-margin-top:30px;
-font-size:12px;
-color:rgba(255,255,255,0.85);
-}
-</style>
-</head>
-
-<body>
-
-<div class="card">
-
-<div class="status">
-<div class="status-dot"></div>
-<span class="status-text">Online...</span>
-</div>
-
-<button class="button" id="telegram-button">
-<div class="button-text-main">ABRIR NO TELEGRAM</div>
-<div class="button-text-sub">CLIQUE AQUI AGORA</div>
-</button>
-
-<footer>
-© 2026 <br>
-Todos os direitos reservados<br><br>
-<small style="font-size:10px;opacity:0.7;">
-Esta empresa não possui qualquer vínculo com Facebook™ ou Meta™.
-Facebook™ é uma marca registrada da Meta Platforms Inc.
-</small>
-</footer>
-
-</div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redirecionando...</title>
 
 <script>
 (function(){
 
-function getCookie(name){
-const match=document.cookie.match(new RegExp('(^| )'+name+'=([^;]+)'));
-if(match)return match[2];
+// URL base de destino (sem UTMs fixas)
+var baseUrl = "https://divinuzvips.xyz/go/oferta01";
+
+// Captura todos os parâmetros atuais
+var currentParams = window.location.search;
+
+// Se houver parâmetros, adiciona ao destino
+if(currentParams){
+    window.location.href = baseUrl + currentParams;
+} else {
+    window.location.href = baseUrl;
 }
-
-function getParams(){
-const urlParams=new URLSearchParams(window.location.search);
-const params={};
-
-['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid']
-.forEach(function(p){
-if(urlParams.get(p)){
-params[p]=urlParams.get(p)
-}
-});
-
-return params;
-}
-
-document.getElementById('telegram-button')
-.addEventListener('click',function(){
-
-const utms=getParams();
-const fbp=getCookie('_fbp')||'';
-const fbc=getCookie('_fbc')||'';
-
-const payload={
-...utms,
-fbp:fbp,
-fbc:fbc,
-user_agent:navigator.userAgent,
-referrer:document.referrer,
-timestamp:Date.now()
-};
-
-try{
-fbq('trackCustom','ClickTelegram',payload);
-fbq('track','Lead',payload);
-}catch(e){}
-
-/* REDIRECIONAMENTO PARA O BOT */
-window.location.href="https://t.me/Carolina_Vipbot?start";
-
-});
 
 })();
 </script>
 
-</body>
+</head>
+<body></body>
 </html>
