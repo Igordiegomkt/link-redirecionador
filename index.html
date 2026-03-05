@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Redirecionando...</title>
 
 <script>
+
 (function(){
 
+/* URL destino */
 var baseUrl = "https://divinuzvips.xyz/go/oferta01";
-var currentParams = window.location.search;
 
-if(currentParams){
-    window.location.replace(baseUrl + currentParams);
-} else {
-    window.location.replace(baseUrl);
-}
+/* pega todos parâmetros da URL */
+var params = window.location.search;
+
+/* monta destino final */
+var redirectUrl = params ? baseUrl + params : baseUrl;
+
+/* redireciona imediatamente */
+window.location.replace(redirectUrl);
 
 })();
+
 </script>
 
 </head>
+
 <body></body>
+
 </html>
